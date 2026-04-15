@@ -21,6 +21,11 @@ dependencies {
     pitest("org.pitest:pitest-junit5-plugin:1.2.1")
     testImplementation("io.cucumber:cucumber-java:7.18.0")
     testImplementation("io.cucumber:cucumber-junit-platform-engine:7.18.0")
+    testImplementation("org.junit.platform:junit-platform-suite:1.10.2")
+    testImplementation("io.cucumber:cucumber-spring:7.14.0")
+
+
+
 }
 
 sonar {
@@ -46,7 +51,15 @@ tasks.test {
     useJUnitPlatform()
 }
 
-tasks.register<Test>("acceptanceTest") { useJUnitPlatform()
+tasks.register<Test>("acceptanceTest") {
+    useJUnitPlatform()
     description = "Runs Cucumber acceptance tests."
     group = "verification"
+
+    useJUnitPlatform()
+
+    testClassesDirs = sourceSets["test"].output.classesDirs
+    classpath = sourceSets["test"].runtimeClasspath
+
+    systemProperty("cucumber.plugin", "pretty")
 }

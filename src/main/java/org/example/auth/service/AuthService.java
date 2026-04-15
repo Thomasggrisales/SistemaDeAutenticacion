@@ -15,6 +15,15 @@ public class AuthService {
     private final UserRepository repository = new UserRepository();
 
     public String register(String username, String password) {
+
+        if (username == null || username.trim().isEmpty()) {
+            return "Username no puede ser vacío";
+        }
+
+        if (password == null || password.trim().isEmpty()) {
+            return "Contraseña no puede ser vacía";
+        }
+
         if (repository.findByUsername(username).isPresent()) {
             return "Usuario ya existe.";
         }
@@ -27,6 +36,14 @@ public class AuthService {
     }
 
     public String login(String username, String password) {
+
+        if (username == null || username.trim().isEmpty()) {
+            return "Username no puede ser vacío";
+        }
+
+        if (password == null || password.trim().isEmpty()) {
+            return "Contraseña no puede ser vacía";
+        }
 
         Optional<User> optionalUser = repository.findByUsername(username);
 

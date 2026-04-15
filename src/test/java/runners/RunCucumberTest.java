@@ -1,7 +1,10 @@
 package runners;
 
-import io.cucumber.junit.platform.engine.Cucumber;
+import org.junit.platform.suite.api.*;
 
-@Cucumber
+@Suite
+@IncludeEngines("cucumber")
+@SelectClasspathResource("features")
+@ConfigurationParameter(key = "cucumber.glue", value = "org.example.auth")
 public class RunCucumberTest {
 }
