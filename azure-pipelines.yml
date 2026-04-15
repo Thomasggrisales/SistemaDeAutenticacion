@@ -2,10 +2,10 @@ trigger:
   - main
 
 pool:
-  name: LocalPool   # Tu agente local registrado en Azure DevOps
+  name: LocalPool   # Agente local registrado en Azure DevOps
 
 variables:
-  projectDir: 'untitled1'
+  projectDir: ''
 
 steps:
   # Paso 1: Chequear el código
@@ -50,5 +50,4 @@ steps:
       workingDirectory: '$(projectDir)'
       gradleWrapperFile: '$(projectDir)/gradlew'
       gradleOptions: '-Dfile.encoding=UTF-8'
-      tasks: 'sonarqube -Dsonar.projectKey=
-Sistemadeautenticacion -Dsonar.host.url=http://localhost:9000/ -Dsonar.token=$(SONAR_TOKEN)'
+      tasks: 'sonarqube -Dsonar.projectKey=Sistemadeautenticacion -Dsonar.host.url=http://localhost:9000/ -Dsonar.token=$(SONAR_TOKEN)'
