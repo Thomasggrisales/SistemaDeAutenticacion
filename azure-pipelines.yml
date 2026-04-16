@@ -61,3 +61,5 @@ steps:
       targetPath: '$(projectDir)/build/libs'
       artifact: 'SistemaDeAutenticacion'
       publishLocation: 'pipeline'
+      SONAR_TOKEN: $(SONAR_TOKEN)
+
