@@ -50,4 +50,14 @@ steps:
       workingDirectory: '$(projectDir)'
       gradleWrapperFile: '$(projectDir)/gradlew'
       gradleOptions: '-Dfile.encoding=UTF-8'
-      tasks: 'sonarqube -Dsonar.projectKey=Sistemadeautenticacion -Dsonar.host.url=http://localhost:9000/ -Dsonar.token=$(SONAR_TOKEN)'
+      tasks: 'sonar'
+    env:
+      SONAR_TOKEN: $(SONAR_TOKEN)
+
+  #Paso 7: Publicar el Artefacto (Guardar el .jar de la aplicación)
+  - task: PublishPipelineArtifact@1
+    displayName: 'Save Artifact in Azure'
+    inputs:
+      targetPath: '$(projectDir)/build/libs'
+      artifact: 'SistemaDeAutenticacion'
+      publishLocation: 'pipeline'
