@@ -50,4 +50,6 @@ steps:
       workingDirectory: '$(projectDir)'
       gradleWrapperFile: '$(projectDir)/gradlew'
       gradleOptions: '-Dfile.encoding=UTF-8'
-      tasks: 'sonarqube -Dsonar.projectKey=Sistemadeautenticacion -Dsonar.host.url=http://localhost:9000/ -Dsonar.token=$(SONAR_TOKEN)'
+      tasks: 'sonar'
+    env:
+      SONAR_TOKEN: $(SONAR_TOKEN)
