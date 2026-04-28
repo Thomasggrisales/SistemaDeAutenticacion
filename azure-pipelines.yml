@@ -63,3 +63,20 @@ steps:
       publishLocation: 'pipeline'
       SONAR_TOKEN: $(SONAR_TOKEN)
 
+  #Paso 8: Levantar app
+  - script: |
+      nohup ./gradlew bootRun &
+      sleep 20
+    displayName: "Levantar aplicación"
+
+  #Paso 9: Ejecutar JMeter
+  - script: |
+      jmeter -n -t tests/stress_test_pipeline.jmx -l results.jtl -e -o report
+    displayName: "Pruebas de carga JMeter"
+
+  #Paso 10: Guardar resultados
+  - task: PublishPipelineArtifact@1
+    displayName: "Resultados JMeter"
+    inputs:
+      targetPath: 'jmeter/results.jtl'
+      artifact: 'JMeterResults'
