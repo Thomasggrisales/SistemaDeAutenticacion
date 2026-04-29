@@ -10,6 +10,7 @@ variables:
 steps:
   # Paso 1: Chequear el código
   - checkout: self
+    fetchDepth: 0
 
   # Paso 2: Verificar versión de Java instalada en el agente local
   - script: java -version

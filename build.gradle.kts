@@ -4,6 +4,7 @@ plugins {
     id("org.springframework.boot") version "3.2.5"
     id("io.spring.dependency-management") version "1.1.4"
     id("info.solidsoft.pitest") version "1.15.0"
+    id("jacoco")
 }
 
 group = "org.example"
@@ -13,29 +14,49 @@ repositories {
     mavenCentral()
 }
 
+val junitVersion = "5.10.0"
+val cucumberVersion = "7.18.0"
+
 dependencies {
-    testImplementation(platform("org.junit:junit-bom:5.10.0"))
+    testImplementation(platform("org.junit:junit-bom:$junitVersion"))
     testImplementation("org.junit.jupiter:junit-jupiter")
+    testImplementation("org.junit.platform:junit-platform-suite:1.10.2")
+
     implementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    pitest("org.pitest:pitest-junit5-plugin:1.2.1")
-    testImplementation("io.cucumber:cucumber-java:7.18.0")
-    testImplementation("io.cucumber:cucumber-junit-platform-engine:7.18.0")
-    testImplementation("org.junit.platform:junit-platform-suite:1.10.2")
-    testImplementation("io.cucumber:cucumber-spring:7.14.0")
 
+    pitest("org.pitest:pitest-junit5-plugin:1.2.1")
+
+    testImplementation("io.cucumber:cucumber-java:$cucumberVersion")
+    testImplementation("io.cucumber:cucumber-junit-platform-engine:$cucumberVersion")
+    testImplementation("io.cucumber:cucumber-spring:7.14.0")
 
 
 }
 
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(true)
+    }
+}
+
+tasks.test {
+    useJUnitPlatform()
+    finalizedBy(tasks.jacocoTestReport)
+}
+
 sonar {
     properties {
+        property ("sonar.java.binaries", "build/classes/java/main")
         property("sonar.projectKey", "SistemaAutenticacion")
         property("sonar.projectName", "Sistemadeautenticacion")
         property("sonar.host.url", "http://localhost:9000")
         property("sonar.token", System.getenv("SONAR_TOKEN"))
 
         property("sonar.qualitygate.wait", "true")
+
+        property("sonar.junit.reportPaths", "build/test-results/test,build/test-results/acceptanceTest")
+        property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml")
     }
 }
 
