@@ -2,7 +2,6 @@ package org.example.auth.steps;
 
 import io.cucumber.java.en.*;
 import org.example.auth.service.AuthService;
-import org.example.auth.service.AuthService.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 

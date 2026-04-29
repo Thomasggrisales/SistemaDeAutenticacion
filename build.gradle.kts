@@ -16,11 +16,13 @@ repositories {
 
 val junitVersion = "5.10.0"
 val cucumberVersion = "7.18.0"
+val junitPlatformVersion = "1.10.2"
+val cucumberSpring = "7.14.0"
 
 dependencies {
     testImplementation(platform("org.junit:junit-bom:$junitVersion"))
     testImplementation("org.junit.jupiter:junit-jupiter")
-    testImplementation("org.junit.platform:junit-platform-suite:1.10.2")
+    testImplementation("org.junit.platform:junit-platform-suite:$junitPlatformVersion")
 
     implementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -29,7 +31,7 @@ dependencies {
 
     testImplementation("io.cucumber:cucumber-java:$cucumberVersion")
     testImplementation("io.cucumber:cucumber-junit-platform-engine:$cucumberVersion")
-    testImplementation("io.cucumber:cucumber-spring:7.14.0")
+    testImplementation("io.cucumber:cucumber-spring:$cucumberSpring")
 
 
 }
@@ -55,8 +57,8 @@ sonar {
 
         property("sonar.qualitygate.wait", "true")
 
-        property("sonar.junit.reportPaths", "build/test-results/test,build/test-results/acceptanceTest")
-        property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml")
+        //property("sonar.junit.reportPaths", "build/test-results/test,build/test-results/acceptanceTest")
+        //property("sonar.coverage.jacoco.xmlReportPaths", "build/reports/jacoco/test/jacocoTestReport.xml")
     }
 }
 

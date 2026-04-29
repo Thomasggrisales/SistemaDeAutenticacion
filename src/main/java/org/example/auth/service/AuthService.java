@@ -9,6 +9,8 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Optional;
 
+import java.security.NoSuchAlgorithmException;
+
 @Service
 public class AuthService {
 
@@ -88,8 +90,8 @@ public class AuthService {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] encodedHash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
             return new String(encodedHash);
-        } catch (Exception e) {
-            throw new RuntimeException("Error hashing password");
+        } catch (NoSuchAlgorithmException e) {
+            throw new IllegalStateException("Error hashing password: SHA-256 algorithm not found", e);
         }
     }
 }
