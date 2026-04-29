@@ -3,7 +3,7 @@ package org.example.auth.service;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class AuthServiceTest {
+class AuthServiceTest {
 
     private final AuthService service = new AuthService();
 

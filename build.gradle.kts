@@ -20,19 +20,18 @@ val junitPlatformVersion = "1.10.2"
 val cucumberSpring = "7.14.0"
 
 dependencies {
+
+    implementation("org.springframework.boot:spring-boot-starter-web")
+
     testImplementation(platform("org.junit:junit-bom:$junitVersion"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.junit.platform:junit-platform-suite:$junitPlatformVersion")
-
-    implementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-
-    pitest("org.pitest:pitest-junit5-plugin:1.2.1")
-
     testImplementation("io.cucumber:cucumber-java:$cucumberVersion")
     testImplementation("io.cucumber:cucumber-junit-platform-engine:$cucumberVersion")
     testImplementation("io.cucumber:cucumber-spring:$cucumberSpring")
 
+    pitest("org.pitest:pitest-junit5-plugin:1.2.1")
 
 }
 
