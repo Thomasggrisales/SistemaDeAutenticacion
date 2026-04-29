@@ -66,18 +66,20 @@ steps:
 
   #Paso 8: Levantar app
   - script: |
-      nohup ./gradlew bootRun &
-      sleep 20
+      start /B gradlew.bat bootRun
+      timeout /t 20 /nobreak
     displayName: "Levantar aplicación"
 
   #Paso 9: Ejecutar JMeter
   - script: |
-      jmeter -n -t tests/stress_test_pipeline.jmx -l results.jtl -e -o report
+      mkdir jmeter_results
+      jmeter.bat -n -t tests/stress_test_pipeline.jmx -l jmeter_results/results.jtl -e -o jmeter_results/report
     displayName: "Pruebas de carga JMeter"
 
-  #Paso 10: Guardar resultados
+  #Paso 10: Guardar resultados completos (JTL + Reporte HTML)
   - task: PublishPipelineArtifact@1
     displayName: "Resultados JMeter"
     inputs:
-      targetPath: 'jmeter/results.jtl'
+      targetPath: '$(projectDir)/jmeter_results'
       artifact: 'JMeterResults'
+      publishLocation: 'pipeline'
