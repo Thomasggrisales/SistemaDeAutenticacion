@@ -67,7 +67,7 @@ steps:
   #Paso 8: Levantar app
   - script: |
       start /B gradlew.bat bootRun
-      timeout /t 20 /nobreak
+      powershell -command "Start-Sleep -Seconds 20"
     displayName: "Levantar aplicación"
 
   #Paso 9: Ejecutar JMeter
