@@ -38,6 +38,34 @@ function Dashboard() {
                         </p>
                         <br />
                     </div>
+
+                    {/* --- NUEVA TARJETA PARA LA CALCULADORA --- */}
+                    <div className="card" style={{ marginTop: '20px' }}>
+                        <h2 className="subtitle">
+                            Herramientas y Servicios
+                        </h2>
+                        <p style={{ marginBottom: '20px' }}>
+                            Accede a los diferentes servicios integrados en tu plataforma.
+                        </p>
+                        <a
+                            href="http://localhost:3001"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-calculadora"
+                            style={{
+                                padding: '10px 20px',
+                                backgroundColor: '#28a745',
+                                color: 'white',
+                                textDecoration: 'none',
+                                borderRadius: '5px',
+                                display: 'inline-block'
+                            }}
+                        >
+                            Abrir Calculadora Financiera
+                        </a>
+                    </div>
+                    {/* ----------------------------------------- */}
+
                 </div>
             </div>
         </div>
