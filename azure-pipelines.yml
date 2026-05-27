@@ -64,21 +64,18 @@ steps:
       publishLocation: 'pipeline'
       SONAR_TOKEN: $(SONAR_TOKEN)
 
-  # Paso 8: Construir imagen Docker
+  # Paso 8: Apagar y limpiar contenedores anteriores si existen
   - script: |
-      docker build -t sistema-auth .
-    displayName: "Construir imagen Docker"
+      docker-compose down
+    displayName: "Limpiar entorno Docker anterior"
+    workingDirectory: $(projectDir)
 
-  # Paso 9: Eliminar contenedor anterior si existe
+  # Paso 9: Construir imágenes y levantar contenedores (Back y Front)
   - script: |
-      docker rm -f auth-container || true
-    displayName: "Limpiar contenedor anterior"
-
-  # Paso 10: Ejecutar contenedor Docker
-  - script: |
-      docker run -d --name auth-container -p 8080:8080 sistema-auth
+      docker-compose up -d --build
       powershell -command "Start-Sleep -Seconds 20"
-    displayName: "Levantar contenedor Docker"
+    displayName: "Levantar aplicación con Docker Compose"
+    workingDirectory: $(projectDir)
 
   #Paso 10 Levantar app
   - script: |

@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  # BACKEND EN SPRING BOOT
+  backend:
+    build: .
+    container_name: spring-backend
+    ports:
+      - "8080:8080"
+
+  # FRONTEND EN REACT
+  frontend:
+    build: ./frontend
+    container_name: react-frontend
+    ports:
+      - "3000:80"
+    depends_on:
+      - backend
