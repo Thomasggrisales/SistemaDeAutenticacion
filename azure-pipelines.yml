@@ -64,19 +64,35 @@ steps:
       publishLocation: 'pipeline'
       SONAR_TOKEN: $(SONAR_TOKEN)
 
-  #Paso 8: Levantar app
+  # Paso 8: Construir imagen Docker
+  - script: |
+      docker build -t sistema-auth .
+    displayName: "Construir imagen Docker"
+
+  # Paso 9: Eliminar contenedor anterior si existe
+  - script: |
+      docker rm -f auth-container || true
+    displayName: "Limpiar contenedor anterior"
+
+  # Paso 10: Ejecutar contenedor Docker
+  - script: |
+      docker run -d --name auth-container -p 8080:8080 sistema-auth
+      powershell -command "Start-Sleep -Seconds 20"
+    displayName: "Levantar contenedor Docker"
+
+  #Paso 10 Levantar app
   - script: |
       start /B gradlew.bat bootRun
       powershell -command "Start-Sleep -Seconds 20"
     displayName: "Levantar aplicación"
 
-  #Paso 9: Ejecutar JMeter
+  #Paso 11: Ejecutar JMeter
   - script: |
       mkdir jmeter_results
       jmeter.bat -n -t tests/stress_test_pipeline.jmx -l jmeter_results/results.jtl -e -o jmeter_results/report
     displayName: "Pruebas de carga JMeter"
 
-  #Paso 10: Guardar resultados completos (JTL + Reporte HTML)
+  #Paso 12: Guardar resultados completos (JTL + Reporte HTML)
   - task: PublishPipelineArtifact@1
     displayName: "Resultados JMeter"
     inputs:
