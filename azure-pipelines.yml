@@ -84,13 +84,34 @@ steps:
       powershell -command "Start-Sleep -Seconds 20"
     displayName: "Levantar aplicación"
 
-  #Paso 11: Ejecutar JMeter
+  # Paso 11: Instalar dependencias de Node (Ya que ignoramos node_modules)
+  - script: |
+      npm install
+    displayName: "Cypress: Instalar dependencias (npm install)"
+    workingDirectory: $(projectDir)
+
+  # Paso 12: Ejecutar la suite de pruebas de Cypress en modo headless
+  - script: |
+      npx cypress run
+    displayName: "Cypress: Ejecutar pruebas E2E"
+    workingDirectory: $(projectDir)
+
+  # Paso 13: Guardar evidencia en Azure si las pruebas fallan (Videos / Fotos)
+  - task: PublishPipelineArtifact@1
+    displayName: "Cypress: Guardar reportes y videos"
+    condition: succeededOrFailed() # Se ejecuta aunque una prueba de Cypress falle
+    inputs:
+      targetPath: '$(projectDir)/cypress'
+      artifact: 'Cypress_E2E_Evidences'
+      publishLocation: 'pipeline'
+
+  #Paso 14: Ejecutar JMeter
   - script: |
       mkdir jmeter_results
       jmeter.bat -n -t tests/stress_test_pipeline.jmx -l jmeter_results/results.jtl -e -o jmeter_results/report
     displayName: "Pruebas de carga JMeter"
 
-  #Paso 12: Guardar resultados completos (JTL + Reporte HTML)
+  #Paso 15: Guardar resultados completos (JTL + Reporte HTML)
   - task: PublishPipelineArtifact@1
     displayName: "Resultados JMeter"
     inputs:
