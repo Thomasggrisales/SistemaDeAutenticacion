@@ -5,6 +5,7 @@ plugins {
     id("io.spring.dependency-management") version "1.1.4"
     id("info.solidsoft.pitest") version "1.15.0"
     id("jacoco")
+
 }
 
 group = "org.example"
@@ -24,15 +25,17 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
 
     testImplementation(platform("org.junit:junit-bom:$junitVersion"))
+
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.junit.platform:junit-platform-suite:$junitPlatformVersion")
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
     testImplementation("io.cucumber:cucumber-java:$cucumberVersion")
     testImplementation("io.cucumber:cucumber-junit-platform-engine:$cucumberVersion")
     testImplementation("io.cucumber:cucumber-spring:$cucumberSpring")
 
     pitest("org.pitest:pitest-junit5-plugin:1.2.1")
-
 }
 
 tasks.jacocoTestReport {

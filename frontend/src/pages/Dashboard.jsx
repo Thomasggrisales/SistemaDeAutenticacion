@@ -39,32 +39,32 @@ function Dashboard() {
                         <br />
                     </div>
 
-                    {/* --- NUEVA TARJETA PARA LA CALCULADORA --- */}
+                    {/* --- NUEVA TARJETA PARA LA APP DE TAREAS --- */}
                     <div className="card" style={{ marginTop: '20px' }}>
                         <h2 className="subtitle">
                             Herramientas y Servicios
                         </h2>
                         <p style={{ marginBottom: '20px' }}>
-                            Accede a los diferentes servicios integrados en tu plataforma.
+                            Gestiona tus pendientes con nuestra nueva aplicación integrada.
                         </p>
                         <a
                             href="http://localhost:3001"
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="btn-calculadora"
+                            className="btn-todo"
                             style={{
                                 padding: '10px 20px',
-                                backgroundColor: '#28a745',
+                                backgroundColor: '#007bff',
                                 color: 'white',
                                 textDecoration: 'none',
                                 borderRadius: '5px',
                                 display: 'inline-block'
                             }}
                         >
-                            Abrir Calculadora Financiera
+                            Abrir Gestor de Tareas
                         </a>
                     </div>
-                    {/* ----------------------------------------- */}
+                    {/* ------------------------------------------- */}
 
                 </div>
             </div>

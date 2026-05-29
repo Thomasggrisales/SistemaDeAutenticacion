@@ -17,20 +17,18 @@ services:
     depends_on:
       - backend
 
-  # BACKEND DE LA CALCULADORA
-  backend-calculadora:
-    # Ajusta esta ruta según cómo se llame la carpeta del back de Santiago
-    build: ./CalculadoraFinanciera/backend
-    container_name: spring-backend-calculadora
+  # BACKEND DEL TO-DO
+  backend-todo:
+    build: ./ToDo-Calidad-de-Software
+    container_name: spring-backend-todo
     ports:
       - "8081:8080"
 
-  # FRONTEND DE LA CALCULADORA
-  frontend-calculadora:
-    # Ajusta esta ruta según cómo se llame la carpeta del front de Santiago
-    build: ./CalculadoraFinanciera/frontend
-    container_name: react-frontend-calculadora
+  # FRONTEND DEL TO-DO
+  frontend-todo:
+    build: ./ToDo-Calidad-de-Software/todo-frontend
+    container_name: react-frontend-todo
     ports:
       - "3001:80"
     depends_on:
-      - backend-calculadora
+      - backend-todo

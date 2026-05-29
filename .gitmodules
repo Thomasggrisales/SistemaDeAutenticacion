@@ -1,3 +1,6 @@
 [submodule "CalculadoraFinanciera"]
 	path = CalculadoraFinanciera
 	url = https://github.com/Santiago-Cardenas-I/CalculadoraFinanciera.git
+[submodule "ToDo-Calidad-de-Software"]
+	path = ToDo-Calidad-de-Software
+	url = https://github.com/Jhorman-13/ToDo-Calidad-de-Software.git
